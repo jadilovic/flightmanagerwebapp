@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
-        name = "HomeServlet", 
+        name = "AirportServlet", 
         urlPatterns = {"/airport"}
     )
 public class AirportServlet extends HttpServlet {
