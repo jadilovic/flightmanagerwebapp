@@ -11,7 +11,7 @@
 <h3>Welcome to Flight Manager Application</h3>
 <h5>Please Choose From Options Offered</h5>
 
-<form action="/airport" method="get">
+<form action="${pageContext.request.contextPath}/airport" method="get">
 	<input type="submit" name="option" value="Create Airport" />
 </form>
 

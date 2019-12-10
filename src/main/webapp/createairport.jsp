@@ -9,7 +9,7 @@
 <body>
 <h3>Create Airport Page</h3>
 <h5>Please enter data to create an airport</h5>
-<form action="/airport" method="post">
+<form action="${pageContext.request.contextPath}/airport" method="post">
 	<input type="hidden" name="message" value="" />
 	<input type="hidden" name="option" value="${param.option}" />
 	<p>Airport name:</p><input type="text" name="airportName" /><br/>
