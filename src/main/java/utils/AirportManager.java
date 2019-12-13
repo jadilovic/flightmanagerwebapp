@@ -27,15 +27,15 @@ public class AirportManager {
 			String query = "SELECT * FROM airport";
 			// create a new ResultSet
 			ResultSet rs = null;
-			try (// java.sql.Statement
-				PreparedStatement statement = connection.prepareStatement(query);) {
+			
+			PreparedStatement statement = connection.prepareStatement(query);
 				// execute the query
 				rs = statement.executeQuery(query);
 				// add airports to the arrayList
 				while (rs.next()) {
 					listOfAirports.add(new Airport(rs.getString("name"), rs.getString("city")));
 				}
-			}
+		
 			if(listOfAirports.size() > 0)
 				message = "List of airports";
 			else
@@ -50,8 +50,8 @@ public class AirportManager {
 			String query = "SELECT * FROM airport WHERE name = ?";
 			// create a new ResultSet
 			ResultSet rs = null;
-			try (// java.sql.Statement
-				PreparedStatement pstatement = connection.prepareStatement(query);) {
+			
+				PreparedStatement pstatement = connection.prepareStatement(query);
 				// fill in the placeholders/parameters
 				pstatement.setString(1, airportName);
 				// execute the query
@@ -63,9 +63,8 @@ public class AirportManager {
 					// close the ResultSet
 					rs.close();
 				}
+				return airport;
 			}
-			return airport;
-		}
 
 		
 		public void addAirport(String airportName, String airportCity) throws SQLException {
@@ -82,8 +81,8 @@ public class AirportManager {
 			
 			// checking validity of the name given and if it already exists
 			if(validAirportName(airportName) && !airportExists(airportName)){
-				try (// java.sql.Statement
-					PreparedStatement statement = connection.prepareStatement(query);) {
+				
+					PreparedStatement statement = connection.prepareStatement(query);
 					// fill in the placeholders/parameters
 					statement.setString(1, airportName.toUpperCase());
 					statement.setString(2, airportCity);
@@ -93,7 +92,7 @@ public class AirportManager {
 					message = "Airport " + airportName.toUpperCase() + " in the city " + airportCity + " added to the database.";
 				}
 			}
-		}
+		
 
 		// method to check length of the name and if it contains only alphabets
 		private boolean validAirportName(String name) throws SQLException {
