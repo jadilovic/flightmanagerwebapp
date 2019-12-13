@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Hello Heroku! Tomcat is here!</h2>
+<h2>Hello Heroku! FlightManager App</h2>
 <a href="/home.jsp">Click here to go to the Home page</a>
 <p></p>
 <a href="/hello">Click here to go to the Hello Servlet</a>
