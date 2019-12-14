@@ -1,24 +1,18 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.startup.CertificateCreateRule;
-
-import conn.ConnectionUtils;
+import beans.Airport;
 import utils.MyUtils;
 
 import utils.AirportManager;
@@ -40,7 +34,17 @@ public class AirportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/createairport.jsp").forward(req, resp);
+    	System.out.println("DoGET Airport Servlet");
+    	String option = req.getParameter("option");
+    	
+    	if(option != null) {
+        	if(option.equals("List Airports")) {
+        		doPost(req, resp);
+        	} else if(option.equals("Create Airport")) {
+                req.getRequestDispatcher("/createairport.jsp").forward(req, resp);
+        	} 
+    	}
+    	req.getRequestDispatcher("/home.jsp").forward(req, resp);
     }
     
 	@Override
@@ -48,23 +52,36 @@ public class AirportServlet extends HttpServlet {
 		String option = request.getParameter("option");
 		String airportName = request.getParameter("airportName");
 		String airportCity = request.getParameter("airportCity");
-		String message = "";
+		String page = "";
+		System.out.println("DoPOST Airport Servlet");
 		
-		 Connection conn = MyUtils.getStoredConnection(request);
+		Connection conn = MyUtils.getStoredConnection(request);
 		AirportManager create = new AirportManager(conn);
 			
 		if(option.equals("Create Airport")) {
 				try {
 					create.addAirport(airportName, airportCity);
+					request.setAttribute("message", create.getMessage());
+					page = "/home.jsp";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		
-		message = create.getMessage();
-		PrintWriter out = response.getWriter();
-		out.println(message);
-		
+		else if(option.equals("List Airports")) {
+			List<Airport> listOfAirports = new ArrayList<>();
+			try {
+				listOfAirports = create.getAllAirports();
+				request.setAttribute("airportsList", listOfAirports);
+				request.setAttribute("message", create.getMessage());
+				page = "/listOfAirportsView.jsp";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			page = "/home";
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 }
