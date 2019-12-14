@@ -10,9 +10,9 @@ public class MySQLConnUtils {
          throws ClassNotFoundException, SQLException {
      // Note: Change the connection parameters accordingly.
      String hostName = "us-cdbr-iron-east-05.cleardb.net";
-     String dbName = "heroku_7fc98160202e1bb";
-     String userName = "b9ee433f786d21";
-     String password = "457fe5a5";
+     String dbName = "heroku_0d5d5551110eea7";
+     String userName = "b71466b7ff9da2";
+     String password = "e5287734";
      return getMySQLConnection(hostName, dbName, userName, password);
  }
   

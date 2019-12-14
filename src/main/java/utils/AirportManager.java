@@ -8,23 +8,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Airport;
+import conn.ConnectionUtils;
+import conn.MySQLConnUtils;
 
 
 public class AirportManager {
 	
 	// AIRPORT INTERFACE IMPLEMENTATION
-	
 	// connect to the database
 	private Connection connection;
 	
 	// message from the database
 	private String message;
+	
+	public AirportManager(Connection conn) {
+		this.connection = conn;
+	}
+
 		
 		public List<Airport> getAllAirports() throws SQLException {
 			// create list of all Airport objects
 			List<Airport> listOfAirports = new ArrayList<Airport>();
 			// create an SELECT SQL query
-			String query = "SELECT * FROM airport";
+			String query = "SELECT * FROM airport a";
 			// create a new ResultSet
 			ResultSet rs = null;
 			
@@ -33,7 +39,7 @@ public class AirportManager {
 				rs = statement.executeQuery(query);
 				// add airports to the arrayList
 				while (rs.next()) {
-					listOfAirports.add(new Airport(rs.getString("name"), rs.getString("city")));
+					listOfAirports.add(new Airport(rs.getString("airport_name"), rs.getString("airport_city")));
 				}
 		
 			if(listOfAirports.size() > 0)
@@ -45,9 +51,9 @@ public class AirportManager {
 
 		public Airport getAirport(String airportName) throws SQLException {
 			// new airport object
-			Airport airport = new Airport();
+			Airport airport = null;
 			// create an SELECT SQL query
-			String query = "SELECT * FROM airport WHERE name = ?";
+			String query = "SELECT * FROM airport a WHERE a.airport_name = ?";
 			// create a new ResultSet
 			ResultSet rs = null;
 			
@@ -59,7 +65,7 @@ public class AirportManager {
 				// set the cursor
 				if (rs.next()) {
 					// populate airport
-					airport = new Airport(rs.getString("name"), rs.getString("city"));
+					airport = new Airport(rs.getString("airport_name"), rs.getString("airport_city"));
 					// close the ResultSet
 					rs.close();
 				}
@@ -70,7 +76,7 @@ public class AirportManager {
 		public void addAirport(String airportName, String airportCity) throws SQLException {
 			System.out.println("Add airport");
 			// create an SELECT SQL query
-			String query = "INSERT INTO airport (name, city) VALUES (?, ?)";
+			String query = "INSERT INTO airport (airport_name, airport_city) VALUES (?, ?)";
 			
 			// giving name for the new airport
 			//System.out.print("Enter airport name: ");
