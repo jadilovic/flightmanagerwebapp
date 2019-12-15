@@ -26,22 +26,22 @@ public class AirlineManager {
 
 	public List<Airline> getAllAirlines() throws SQLException {
 		// create list of all airlines
-		List<Airline> listOfAirlines = new ArrayList<>();
+		List<Airline> listOfAirlines = new ArrayList<Airline>();
 		// create an SELECT SQL query
 		String query = "SELECT * FROM airline";
 		// create a new ResultSet
 		ResultSet rs = null;
-		try (// java.sql.Statement
-				Statement statement = connection.createStatement();) {
+				Statement statement = connection.createStatement();
 			// execute the query
 			rs = statement.executeQuery(query);
 			// add airlines to the list
 			while (rs.next()) {
 				listOfAirlines.add(new Airline(rs.getString("airline_name")));
 			}
+			return listOfAirlines;
 		}
-		return listOfAirlines;
-	}
+
+
 
 	public Airline getAirline(String airlineName) throws SQLException {
 		// airline object
@@ -50,8 +50,7 @@ public class AirlineManager {
 		String query = "SELECT * FROM airline WHERE airline_name = ?";
 		// create a new ResultSet
 		ResultSet rs = null;
-		try (// java.sql.Statement
-			PreparedStatement pstatement = connection.prepareStatement(query);) {
+			PreparedStatement pstatement = connection.prepareStatement(query);
 			// fill in the placeholders /parameters
 			pstatement.setString(1, airlineName);
 			// execute the query
@@ -63,9 +62,8 @@ public class AirlineManager {
 				// close the ResultSet
 				rs.close();
 			}
+			return airline;
 		}
-		return airline;
-	}
 
 	public void addAirline(String airlineName) throws SQLException {
 		// create an SELECT SQL query
