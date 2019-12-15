@@ -73,8 +73,7 @@ public class AirlineManager {
 		//String name = enterString();
 		// checking airline name and if it exists
 		if(validAirlineName(airlineName) && !airlineExists(airlineName)){
-			try (// java.sql.Statement
-				PreparedStatement statement = connection.prepareStatement(query);) {
+				PreparedStatement statement = connection.prepareStatement(query);
 				// fill in the placeholders/parameters
 				statement.setString(1, airlineName.toUpperCase());
 				// execute the query
@@ -82,7 +81,6 @@ public class AirlineManager {
 				message = "Airline " + airlineName.toUpperCase() + " added to the database.";
 			}
 		}
-	}
 
 	// checking if airline exists in the database already
 	private boolean airlineExists(String name) throws SQLException {
