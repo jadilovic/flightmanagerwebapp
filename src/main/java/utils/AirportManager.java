@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Airport;
-import conn.ConnectionUtils;
-import conn.MySQLConnUtils;
-
 
 public class AirportManager {
 	
@@ -24,8 +21,7 @@ public class AirportManager {
 	public AirportManager(Connection conn) {
 		this.connection = conn;
 	}
-
-		
+	
 		public List<Airport> getAllAirports() throws SQLException {
 			// create list of all Airport objects
 			List<Airport> listOfAirports = new ArrayList<Airport>();

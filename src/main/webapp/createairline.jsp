@@ -4,17 +4,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Create Airport</title>
+<title>Create Airline</title>
 </head>
 <body>
 <div align="center" >
-<h3>Create Airport Page</h3>
-<h5>Please enter data to create an airport</h5>
-<form action="${pageContext.request.contextPath}/airport" method="post">
+<h3>Create Airline Page</h3>
+<h5>Please enter data to create an airline</h5>
+<form action="${pageContext.request.contextPath}/airline" method="post">
 	<input type="hidden" name="message" value="" />
 	<input type="hidden" name="option" value="${param.option}" />
-	<p>Airport name:</p><input type="text" name="airportName" /><br/>
-	<p>Airport city:</p><input type="text" name="airportCity" /><br/>
+	<p>Airline name:</p><input type="text" name="airlineName" /><br/>
 	<p></p><input type="submit" value="SUBMIT" />
 </form>
 </div>

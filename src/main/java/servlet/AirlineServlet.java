@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Airport;
+import beans.Airline;
 import utils.MyUtils;
 
-import utils.AirportManager;
+import utils.AirlineManager;
 
 @WebServlet(
-        name = "AirportServlet", 
-        urlPatterns = {"/airport"}
+        name = "AirlineServlet", 
+        urlPatterns = {"/airline"}
     )
-public class AirportServlet extends HttpServlet {
+public class AirlineServlet extends HttpServlet {
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AirportServlet() {
+    public AirlineServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,34 +34,33 @@ public class AirportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-    	System.out.println("DoGET Airport Servlet");
+    	System.out.println("DoGET Airline Servlet");
     	String option = req.getParameter("option");
     	
     	if(option != null) {
-        	if(option.equals("List Airports")) {
+        	if(option.equals("List Airlines")) {
         		doPost(req, resp);
-        	} else if(option.equals("Create Airport")) {
-                req.getRequestDispatcher("/createairport.jsp").forward(req, resp);
+        	} else if(option.equals("Create Airline")) {
+                req.getRequestDispatcher("/createairline.jsp").forward(req, resp);
         	} 
     	} else {
-    		req.getRequestDispatcher("/home.jsp").forward(req, resp);
+        	req.getRequestDispatcher("/home.jsp").forward(req, resp);
     	}
     }
     
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String option = request.getParameter("option");
-		String airportName = request.getParameter("airportName");
-		String airportCity = request.getParameter("airportCity");
+		String airlineName = request.getParameter("airlineName");
 		String page = "";
-		System.out.println("DoPOST Airport Servlet");
+		System.out.println("DoPOST Airline Servlet");
 		
 		Connection conn = MyUtils.getStoredConnection(request);
-		AirportManager create = new AirportManager(conn);
+		AirlineManager create = new AirlineManager(conn);
 			
-		if(option.equals("Create Airport")) {
+		if(option.equals("Create Airline")) {
 				try {
-					create.addAirport(airportName, airportCity);
+					create.addAirline(airlineName);
 					request.setAttribute("message", create.getMessage());
 					page = "/home.jsp";
 				} catch (SQLException e) {
@@ -69,13 +68,13 @@ public class AirportServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		else if(option.equals("List Airports")) {
-			List<Airport> listOfAirports = new ArrayList<Airport>();
+		else if(option.equals("List Airlines")) {
+			List<Airline> listOfAirports = new ArrayList<Airline>();
 			try {
-				listOfAirports = create.getAllAirports();
-				request.setAttribute("airportsList", listOfAirports);
+				listOfAirports = create.getAllAirlines();
+				request.setAttribute("airlinesList", listOfAirports);
 				request.setAttribute("message", create.getMessage());
-				page = "/listOfAirportsView.jsp";
+				page = "/listOfAirlinesView.jsp";
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

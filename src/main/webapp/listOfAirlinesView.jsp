@@ -5,28 +5,26 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Airports List</title>
+<title>Airlines List</title>
 </head>
 <body>
 <div align="center" >
-<h3>List of Available Airports</h3>
+<h3>List of Available Airlines</h3>
  
     <p style="color: red;">${errorString}</p>
  
     <table border="1">
        <tr>
-          <th>Airport Name</th>
-          <th>Airport City</th>
+          <th>Airline Name</th>
        </tr>
-       <c:forEach items="${airportsList}" var="airport" >
+       <c:forEach items="${airlinesList}" var="airline" >
           <tr>
-             <td>${airport.name}</td>
-             <td>${airport.city}</td>
+             <td>${airline.name}</td>
           </tr>
        </c:forEach>
     </table>
  
-    <a href="/airport" >Home</a>
+    <a href="/airline" >Home</a>
 </div>
 </body>
 </html>
