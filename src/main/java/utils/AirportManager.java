@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,24 +14,24 @@ public class AirportManager {
 	
 	// AIRPORT INTERFACE IMPLEMENTATION
 	// connect to the database
-	private Connection connection;
+	private static Connection connection;
 	
 	// message from the database
-	private String message;
+	private static String message;
 	
 	public AirportManager(Connection conn) {
-		this.connection = conn;
+		connection = conn;
 	}
 	
-		public List<Airport> getAllAirports() throws SQLException {
+		public static List<Airport> getAllAirports() throws SQLException {
 			// create list of all Airport objects
 			List<Airport> listOfAirports = new ArrayList<Airport>();
 			// create an SELECT SQL query
-			String query = "SELECT * FROM airport a";
+			String query = "SELECT * FROM airport";
 			// create a new ResultSet
 			ResultSet rs = null;
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			Statement statement = connection.createStatement();
 				// execute the query
 				rs = statement.executeQuery(query);
 				// add airports to the arrayList
@@ -45,7 +46,7 @@ public class AirportManager {
 			return listOfAirports;
 		}
 
-		public Airport getAirport(String airportName) throws SQLException {
+		public static Airport getAirport(String airportName) throws SQLException {
 			// new airport object
 			Airport airport = null;
 			// create an SELECT SQL query

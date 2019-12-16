@@ -15,7 +15,7 @@ public class AirlineManager {
 	
 	// AIRPORT INTERFACE IMPLEMENTATION
 	// connect to the database
-	private Connection connection;
+	private static Connection connection;
 	
 	// message from the database
 	private String message;
@@ -43,7 +43,7 @@ public class AirlineManager {
 
 
 
-	public Airline getAirline(String airlineName) throws SQLException {
+	public static Airline getAirline(String airlineName) throws SQLException {
 		// airline object
 		Airline airline = null;
 		// create an SELECT SQL query
