@@ -115,7 +115,7 @@ public class SeatManager {
 				seats = getAllFlightSeats(flightId);
 				System.out.println("     SeatID Row Seat# Available FlightID");
 				// creating list of id's for each seat on the flight
-				List<Integer> listOfSeatsIds = new ArrayList<>();
+				List<Integer> listOfSeatsIds = new ArrayList<Integer>();
 				// adding all id's to the list
 				for(Seat seat: seats){
 					listOfSeatsIds.add(seat.getSeatID());
