@@ -28,7 +28,7 @@ public class FlightManager {
 	
 		public List<Flight> getAllFlights() throws SQLException {
 			// create list of all flights
-			List<Flight> listOfFlights = new ArrayList<>();
+			List<Flight> listOfFlights = new ArrayList<Flight>();
 			// create an SELECT SQL query
 			String query = "SELECT * FROM flight";
 			// create a new ResultSet

@@ -23,7 +23,7 @@ public class SeatManager {
 	
 		public List<Seat> getAllFlightSeats(Integer flightId) throws SQLException {
 			// creating list of seats for one particular flight
-			List<Seat> listOfSeats = new ArrayList<>();
+			List<Seat> listOfSeats = new ArrayList<Seat>();
 			// create an SELECT SQL query
 			String query = "SELECT * FROM seats WHERE flightID = ?";
 			// create a new ResultSet
