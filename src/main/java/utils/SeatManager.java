@@ -123,7 +123,7 @@ public class SeatManager {
 				}
 			}
 
-		public List<Seat> bookFlight(String flightId) throws SQLException {
+		public List<Seat> getFlightSeats(String flightId) throws SQLException {
 			
 			int flightIdINT = 0;
 			List<Seat> flightSeats = new ArrayList<Seat>();
@@ -146,46 +146,41 @@ public class SeatManager {
 				} 
 
 
-		public void bookSeat(String flightId) throws SQLException {
-			// System.out.println("On what flight you would like to book a seat? Please enter flight id.");
-			// entering flight id to get a flight
-			// Integer flightId = FlightManager.enterInteger();
-			// Checking if given flight exists
-			//System.out.print("Enter unique ID of the flight: ");
+		public Seat bookSeat(String flightID, String seatID) throws SQLException {
+			// initializing seatID and flightID integers
 			int flightIdINT = 0;
+			int seatIdINT = 0;
+			Seat seat = null;
+
+			// checking if entered flight ID is a number
+		if(flightID.matches("[0-9]+") && !flightID.equals("")){
+			flightIdINT = Integer.parseInt(flightID);
 			
-		if(flightId.matches("[0-9]+") && !flightId.equals("")){
-			flightIdINT = Integer.parseInt(flightId);
+			// checking if entered seat ID is a number
+			if(seatID.matches("[0-9]+") && !seatID.equals("")){
+				seatIdINT = Integer.parseInt(seatID);
 			
-			if(FlightManager.flightIdExists(flightIdINT)){
-				List<Seat> seats = null;
-				// getting all seats for the flight
-				seats = getAllFlightSeats(flightIdINT);
-				//System.out.println("     SeatID Row Seat# Available FlightID");
-				// creating list of id's for each seat on the flight
-				List<Integer> listOfSeatsIds = new ArrayList<Integer>();
-				// adding all id's to the list
-				for(Seat seat: seats){
-					listOfSeatsIds.add(seat.getSeatID());
-					// showing all seats to the user on the screen
-					printSeat(seat);
-				}
-				System.out.println("Please choose from available seats. Enter seat id.");
-				// entering seat id
-				int seatId = FlightManager.enterInteger();
-				if(listOfSeatsIds.contains(seatId)){
-					if(getSeatById(seatId).isAvailable() == true){
+				// check if flight ID exists
+				if(FlightManager.flightIdExists(flightIdINT)) {
+					
+					// check if the seat ID exists
+					if((getSeatById(seatIdINT)) != null){
+						
+						// check if the seat is available
+						if(getSeatById(seatIdINT).isAvailable() == true){
+							
 						// create an SELECT SQL query
 						String query = "UPDATE seats SET available = ? WHERE seatID = ?";
 							PreparedStatement statement = connection.prepareStatement(query);
 							// fill in the placeholders/parameters
 							statement.setBoolean(1, false);
-							statement.setInt(2, seatId);
+							statement.setInt(2, seatIdINT);
 							// execute the query
 							statement.executeUpdate();
+							
+							seat = getSeatById(seatIdINT);
 							// printing booked seat
-							printSeat(getSeatById(seatId));
-							System.out.println("was booked");
+							message = "Seat with ID number " + seatIdINT + " was booked on the flight with ID: " + flightIdINT;
 								} else {
 									message = "Selected seat is not available";
 								}
@@ -196,9 +191,13 @@ public class SeatManager {
 							message = "There is no flight with given flight id";
 						} 
 					} else {
-						message = "Entered flight ID is not a number or it is empty.";
+						message = "Entered seat ID is not a number or it is empty.";
 					}		
-				} 
+				}  else {
+					message = "Entered flight ID is not a number or it is empty.";
+				}
+		return seat;
+			}
 
 		
 		public void printSeat(Seat seat) {

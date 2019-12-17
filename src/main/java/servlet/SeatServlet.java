@@ -45,8 +45,8 @@ public class SeatServlet extends HttpServlet {
     	if(option != null) {
         	if(option.equals("List Seats")) {
         		doPost(req, resp);
-        	} else if(option.equals("Book a Flight")) {
-                req.getRequestDispatcher("/bookaflight.jsp").forward(req, resp);
+        	} else if(option.equals("Flight Seats")) {
+                req.getRequestDispatcher("/flightseats.jsp").forward(req, resp);
         	} else if(option.equals("Book a Seat")) {
         		req.setAttribute("message", message);
         		req.getRequestDispatcher("/bookaseat.jsp").forward(req, resp);
@@ -59,7 +59,8 @@ public class SeatServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String option = request.getParameter("option");
-		String flightId = request.getParameter("flightID");
+		String flightID = request.getParameter("flightID");
+		String seatID = request.getParameter("seatID");
 		String page = "";
 		System.out.println("DoPOST Seat Servlet");
 		
@@ -67,15 +68,16 @@ public class SeatServlet extends HttpServlet {
 		FlightManager flg = new FlightManager(conn);
 		AirportManager air = new AirportManager(conn);
 		AirlineManager lin = new AirlineManager(conn);
-		SeatManager flight = new SeatManager(conn);
+		SeatManager seat = new SeatManager(conn);
 		List<Seat> listOfSeats = new ArrayList<Seat>();
+		Seat bookedSeat = new Seat();
 			
-		if(option.equals("Book a Flight")) {
+		if(option.equals("Flight Seats")) {
 				try {
-					listOfSeats = flight.bookFlight(flightId);
+					listOfSeats = seat.getFlightSeats(flightID);
 					request.setAttribute("flightSeats", listOfSeats);
 					request.setAttribute("listSize", listOfSeats.size());
-					request.setAttribute("message", flight.getMessage());
+					request.setAttribute("message", seat.getMessage());
 					page = "/listOfSeatsView.jsp";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -84,21 +86,25 @@ public class SeatServlet extends HttpServlet {
 			}
 		else if(option.equals("List Seats")) {
 			try {
-				listOfSeats = flight.getAllSeats();
+				listOfSeats = seat.getAllSeats();
 				request.setAttribute("flightSeats", listOfSeats);
 				request.setAttribute("listSize", listOfSeats.size());
-				request.setAttribute("message", flight.getMessage());
-				page = "/listOfSeatsView.jsp";
+				request.setAttribute("message", seat.getMessage());
+				page = "/listOfSeatsAllFlightsView.jsp";
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-		} else if(option.equals("Find a Seat")) {
-			//listOfFlights = create.findFlight(origin, destination);
-			//request.setAttribute("flightsList", listOfFlights);
-			//request.setAttribute("listSize", listOfFlights.size());
-			request.setAttribute("message", "Find Seat option");
-			page = "/listOfSeatsView.jsp";
+		} else if(option.equals("Book a Seat")) {
+			try {
+				bookedSeat = seat.bookSeat(flightID, seatID);
+				request.setAttribute("seat", bookedSeat);
+				request.setAttribute("message", seat.getMessage());
+				page = "/bookaseat.jsp";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			page = "/home";
 		}
