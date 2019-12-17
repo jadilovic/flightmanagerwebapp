@@ -11,9 +11,11 @@ public class Flight {
 	
 	//which airline owns this flight
 	private Airline airline;
+	private String airline_name;
 	
 	//from which airport flight takes of
 	private Airport airport;
+	private String airport_name;
 	
 	//all seats in this flight
 	private ArrayList<Seat> seats;
@@ -33,6 +35,8 @@ public class Flight {
 		this.setFlight_name(flight_name);
 		this.origin = origin;
 		this.destination = destination;
+		this.airport_name = airport;
+		this.airline_name = airline;
 		this.airport = new Airport(airport, origin);
 		this.airline = new Airline(airline);
 	}
@@ -91,6 +95,34 @@ public class Flight {
 
 	public void setFlight_name(String flight_name) {
 		this.flight_name = flight_name;
+	}
+
+	/**
+	 * @return the airline_name
+	 */
+	public String getAirline_name() {
+		return airline_name;
+	}
+
+	/**
+	 * @param airline_name the airline_name to set
+	 */
+	public void setAirline_name(String airline_name) {
+		this.airline_name = airline_name;
+	}
+
+	/**
+	 * @return the airport_name
+	 */
+	public String getAirport_name() {
+		return airport_name;
+	}
+
+	/**
+	 * @param airport_name the airport_name to set
+	 */
+	public void setAirport_name(String airport_name) {
+		this.airport_name = airport_name;
 	}
 
 	@Override

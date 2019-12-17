@@ -51,13 +51,13 @@
 </tr>
 <tr>
 	<td>
-		<form action="${pageContext.request.contextPath}/findflight" method="get">
+		<form action="${pageContext.request.contextPath}/flight" method="get">
 			<input type="submit" name="option" value="Find a Flight" />
 		</form>
 	</td>
 	<td>
-		<form action="${pageContext.request.contextPath}/listseats" method="get">
-			<input type="submit" name="option" value="List Seats" />
+		<form action="${pageContext.request.contextPath}/bookflight" method="get">
+			<input type="submit" name="option" value="Book a Flight" />
 		</form>
 	</td>
 </tr>

@@ -39,13 +39,17 @@ public class FlightServlet extends HttpServlet {
             throws ServletException, IOException {
     	System.out.println("DoGET Flight Servlet");
     	String option = req.getParameter("option");
+    	String message = "";
     	
     	if(option != null) {
         	if(option.equals("List Flights")) {
         		doPost(req, resp);
         	} else if(option.equals("Create Flight")) {
                 req.getRequestDispatcher("/createflight.jsp").forward(req, resp);
-        	} 
+        	} else if(option.equals("Find a Flight")) {
+        		req.setAttribute("message", message);
+        		req.getRequestDispatcher("/findaflight.jsp").forward(req, resp);
+        	}
     	} else {
         	req.getRequestDispatcher("/home.jsp").forward(req, resp);
     	}
@@ -69,6 +73,7 @@ public class FlightServlet extends HttpServlet {
 		AirportManager air = new AirportManager(conn);
 		AirlineManager lin = new AirlineManager(conn);
 		SeatManager seat = new SeatManager(conn);
+		List<Flight> listOfFlights = new ArrayList<Flight>();
 			
 		if(option.equals("Create Flight")) {
 				try {
@@ -81,10 +86,21 @@ public class FlightServlet extends HttpServlet {
 				}
 			}
 		else if(option.equals("List Flights")) {
-			List<Flight> listOfFlights = new ArrayList<Flight>();
 			try {
 				listOfFlights = create.getAllFlights();
 				request.setAttribute("flightsList", listOfFlights);
+				request.setAttribute("listSize", listOfFlights.size());
+				request.setAttribute("message", create.getMessage());
+				page = "/listOfFlightsView.jsp";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		} else if(option.equals("Find a Flight")) {
+			try {
+				listOfFlights = create.findFlight(origin, destination);
+				request.setAttribute("flightsList", listOfFlights);
+				request.setAttribute("listSize", listOfFlights.size());
 				request.setAttribute("message", create.getMessage());
 				page = "/listOfFlightsView.jsp";
 			} catch (SQLException e) {

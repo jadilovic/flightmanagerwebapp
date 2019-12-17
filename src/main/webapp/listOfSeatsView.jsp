@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Flights List</title>
+<title>List of Seats</title>
 </head>
 <body>
 <div align="center" >
-<h3>List of Available Flights</h3>
+<h3>List of Seats on a Selected Flight</h3>
  
     <p style="color: red;">${errorString}</p>
     
@@ -23,33 +23,31 @@
     <c:set var = "listSize" scope = "page" value = "${param.listSize}"/>
     <c:if test="${listSize > 0}">
     	<tr>
+          <th>Seat ID</th>
+          <th>Row</th>
+          <th>Seat Number</th>
+          <th>Available</th>
           <th>Flight ID</th>
-          <th>Flight Name</th>
-          <th>Origin</th>
-          <th>Destination</th>
-          <th>Airport</th>
-          <th>Airline</th>
        </tr>
     </c:if>
 
-       <c:forEach items="${flightsList}" var="flight" >
+       <c:forEach items="${flightSeats}" var="seat" >
           <tr>
-             <td>${flight.id}</td>
-             <td>${flight.flight_name}</td>
-             <td>${flight.origin}</td>
-             <td>${flight.destination}</td>
-             <td>${flight.airport_name}</td>
-             <td>${flight.airline_name}</td>
+             <td>${seat.seatID}</td>
+             <td>${seat.row}</td>
+             <td>${seat.seatNumber}</td>
+             <td>${seat.available}</td>
+             <td>${seat.flightID}</td>
           </tr>
        </c:forEach>
     </table>
 
-	 <form action="${pageContext.request.contextPath}/flight" method="get">
+	 <form action="${pageContext.request.contextPath}/bookflight" method="get">
 	<input type="hidden" name="message" value="" />
-	<input type="hidden" name="option" value="Find a Flight" />
-	<p><input type="submit" value="Find a Flight" /></p>
+	<input type="hidden" name="option" value="Book a Seat" />
+	<p><input type="submit" value="Book a Seat" /></p>
 	</form>
-    <a href="/flight" >Home</a>
+    <a href="/bookflight" >Home</a>
 </div>
 </body>
 </html>

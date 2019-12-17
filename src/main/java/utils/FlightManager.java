@@ -68,6 +68,33 @@ public class FlightManager {
 				return flight;	
 			}
 
+		public List<Flight> findFlight(String origin, String destination) throws SQLException {
+			// create list of all flights
+			List<Flight> listOfFlights = new ArrayList<Flight>();
+			// create an SELECT SQL query
+			String query = "SELECT * FROM flight WHERE origin = ? AND destination = ?";
+			// create a new ResultSet
+			ResultSet rs = null;
+			PreparedStatement statement = connection.prepareStatement(query);
+			// fill in the placeholders/parameters
+			statement.setString(1, origin);
+			statement.setString(2, destination);
+
+			// execute the query
+			rs = statement.executeQuery();
+				// add airports to the arrayList
+				while (rs.next()) {
+					listOfFlights.add(new Flight(rs.getInt("id"), rs.getString("flight_name"), rs.getString("origin"), 
+							rs.getString("destination"), rs.getString("airport"), rs.getString("airline")));
+				}
+				if(listOfFlights.size() > 0) {
+					message = "Available flights";
+				} else {
+					message = "No available flights with given origin and destination"
+							+ ". Please try again or return to the Home page.";
+				}
+				return listOfFlights;
+			}
 
 		public void addFlight(String flightId2, String flightName, String origin, String destination, 
 				String airport, String airline, String seatsPerRow) throws SQLException {
@@ -207,11 +234,11 @@ public class FlightManager {
 		}
 		
 		// finding a flight with given origin and destination
-		public void enterOriginAndDestination() throws SQLException {
-			System.out.println("Please enter origin of the flight");
-			String origin = enterString();
-			System.out.println("Please enter destination of the flight");
-			String destination = enterString();
+		public void enterOriginAndDestination(String origin, String destination) throws SQLException {
+			// System.out.println("Please enter origin of the flight");
+			// String origin = enterString();
+			// System.out.println("Please enter destination of the flight");
+			// String destination = enterString();
 			int count = 0;
 			for(Flight flight: getAllFlights()){
 				if(flight.getOrigin().equals(origin) && flight.getDestination().equals(destination)){
