@@ -63,7 +63,7 @@ public class AirportServlet extends HttpServlet {
 				try {
 					create.addAirport(airportName, airportCity);
 					request.setAttribute("message", create.getMessage());
-					page = "/home.jsp";
+					page = "/createairport.jsp";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

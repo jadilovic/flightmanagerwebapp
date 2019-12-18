@@ -62,7 +62,7 @@ public class AirlineServlet extends HttpServlet {
 				try {
 					create.addAirline(airlineName);
 					request.setAttribute("message", create.getMessage());
-					page = "/home.jsp";
+					page = "/createairline.jsp";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,15 @@
 	<p>Airline name:</p><input type="text" name="airlineName" /><br/>
 	<p></p><input type="submit" value="SUBMIT" />
 </form>
+
+	<c:if test="${param.message != null}">
+		<div style="background-color:red" >
+			<p><%= request.getAttribute("message") %></p>
+		</div>
+	</c:if>
+
+	<p><a href="/airline" >Home</a></p>
+
 </div>
 </body>
 </html>

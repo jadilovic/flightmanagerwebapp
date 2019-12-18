@@ -11,14 +11,6 @@
 <div align="center" >
 <h3>List of Available Flights</h3>
  
-    <p style="color: red;">${errorString}</p>
-    
-    <c:if test="${param.message != null}">
-	<div style="background-color:red" >
-			<p><%= request.getAttribute("message") %></p>
-	</div>
-	</c:if>
- 
     <table border="1">
     <c:set var = "listSize" scope = "page" value = "${param.listSize}"/>
     <c:if test="${listSize > 0}">
@@ -43,12 +35,25 @@
           </tr>
        </c:forEach>
     </table>
+    
+    <c:if test="${param.message != null}">
+	<div style="background-color:red" >
+			<p><%= request.getAttribute("message") %></p>
+	</div>
+	</c:if>
 
 	 <form action="${pageContext.request.contextPath}/flight" method="get">
-	<input type="hidden" name="message" value="" />
-	<input type="hidden" name="option" value="Find a Flight" />
-	<p><input type="submit" value="Find a Flight" /></p>
+		<input type="hidden" name="message" value="" />
+		<input type="hidden" name="option" value="Find a Flight" />
+		<p><input type="submit" value="Find a Flight" /></p>
 	</form>
+	
+	<form action="${pageContext.request.contextPath}/bookflight" method="get">
+		<input type="hidden" name="message" value="" />
+		<input type="hidden" name="option" value="Flight Seats" />
+		<p><input type="submit" value="List Flight Seats" /></p>
+	</form>
+	
     <a href="/flight" >Home</a>
 </div>
 </body>

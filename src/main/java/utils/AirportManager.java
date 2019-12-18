@@ -75,13 +75,6 @@ public class AirportManager {
 			// create an SELECT SQL query
 			String query = "INSERT INTO airport (airport_name, airport_city) VALUES (?, ?)";
 			
-			// giving name for the new airport
-			//System.out.print("Enter airport name: ");
-			//String name = enterString();
-			// giving city for the new airport
-			//System.out.print("Enter city: ");
-			//String city = enterString();
-			
 			// checking validity of the name given and if it already exists
 			if(validAirportName(airportName) && !airportExists(airportName)){
 				
@@ -100,11 +93,11 @@ public class AirportManager {
 		// method to check length of the name and if it contains only alphabets
 		private boolean validAirportName(String name) throws SQLException {
 			if(name.length() != 3){
-				message = "Length of the Airport name '" + name + "' must be exactly 3 characters. Please try again.";
+				message = "Length of the Airport name must be exactly 3 characters. Please try again.";
 				return false;
 			}
 			else if(!onlyAlphabets(name)){
-				message = "Entered Airport name '" + name + "' does not contain all alphabets. Please try again.";
+				message = "Entered Airport name does not contain all alphabets. Please try again.";
 				return false;
 			} else 
 			return true;
@@ -113,7 +106,7 @@ public class AirportManager {
 		// method checking if airport already exists
 		private boolean airportExists(String name) throws SQLException {
 				if(getAirport(name) != null){
-					message = "Entered Airport name '" + name + "' already exists. Please try again.";
+					message = "Entered Airport name already exists. Please try again.";
 					return true;
 				}
 			return false;

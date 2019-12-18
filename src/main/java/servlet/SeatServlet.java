@@ -41,6 +41,7 @@ public class SeatServlet extends HttpServlet {
     	System.out.println("DoGET Seat Servlet");
     	String option = req.getParameter("option");
     	String message = "";
+    	req.setAttribute("message", message);
     	
     	if(option != null) {
         	if(option.equals("List Seats")) {
@@ -62,6 +63,8 @@ public class SeatServlet extends HttpServlet {
 		String flightID = request.getParameter("flightID");
 		String seatID = request.getParameter("seatID");
 		String page = "";
+    	String message = null;
+    	request.setAttribute("message", message);
 		System.out.println("DoPOST Seat Servlet");
 		
 		Connection conn = MyUtils.getStoredConnection(request);
@@ -73,18 +76,17 @@ public class SeatServlet extends HttpServlet {
 		Seat bookedSeat = new Seat();
 			
 		if(option.equals("Flight Seats")) {
-				try {
-					listOfSeats = seat.getFlightSeats(flightID);
-					request.setAttribute("flightSeats", listOfSeats);
-					request.setAttribute("listSize", listOfSeats.size());
-					request.setAttribute("message", seat.getMessage());
-					page = "/listOfSeatsView.jsp";
+			try {
+				listOfSeats = seat.getFlightSeats(flightID);
+				request.setAttribute("flightSeats", listOfSeats);
+				request.setAttribute("listSize", listOfSeats.size());
+				request.setAttribute("message", seat.getMessage());
+				page = "/listOfSeatsView.jsp";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-		else if(option.equals("List Seats")) {
+			} else if(option.equals("List Seats")) {
 			try {
 				listOfSeats = seat.getAllSeats();
 				request.setAttribute("flightSeats", listOfSeats);

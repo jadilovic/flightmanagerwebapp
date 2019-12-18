@@ -85,7 +85,7 @@ public class AirlineManager {
 	// checking if airline exists in the database already
 	private boolean airlineExists(String name) throws SQLException {
 		if(getAirline(name) != null){
-			message = "Entered Airline name '" + name + "' already exists. Please try again.";
+			message = "Entered Airline name already exists. Please try again.";
 			return true;
 		}
 		return false;
@@ -94,11 +94,11 @@ public class AirlineManager {
 	// checking if the given airline name is less than 5 characters and all alphabetic characters
 	private boolean validAirlineName(String name) throws SQLException {
 		if(name.length() > 5){
-			message = "Length of the Airline name '" + name + "' is greater than 5 characters. Please try again.";
+			message = "Length of the Airline name is greater than 5 characters. Please try again.";
 			return false;
 		}
 		else if(!onlyAlphabets(name)){
-			message = "Entered Airline name '" + name + "' does not contain all alphabets. Please try again.";
+			message = "Entered Airline name does not contain all alphabets. Please try again.";
 			return false;
 		} else
 		return true;
