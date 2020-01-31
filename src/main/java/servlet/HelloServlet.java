@@ -19,7 +19,7 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
-        out.write("Hello from Hell Servlet from Heroku".getBytes());
+        out.write("This web application is hosted on the Heroku Server".getBytes());
         out.flush();
         out.close();
     }
