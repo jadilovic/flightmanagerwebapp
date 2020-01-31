@@ -9,15 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/326e4a206d.js" crossorigin="anonymous"></script>
 <title>Home Page</title>
 </head>
 <body>
 <div align="center" class="p-3 mb-2 bg-light text-dark">
+
 	<div class="p-3 mb-2 bg-warning text-dark">
-		<h3>Flight Manager Application</h3>
+		<h4><i class="fas fa-plane-departure"></i> Flight Manager Application</h4>
 	</div>
-	<div class="p-3 mb-2 bg-success text-dark">
-		<h4>Please Choose From Options Offered</h4>
+	<div class="p-3 mb-2 bg-success text-white">
+		<h4><i class="far fa-hand-pointer"></i> Please Choose From Options Offered Below</h4>
 	</div>
 
 <table>
