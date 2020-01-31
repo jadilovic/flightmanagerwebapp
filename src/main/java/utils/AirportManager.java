@@ -72,22 +72,28 @@ public class AirportManager {
 		
 		public void addAirport(String airportName, String airportCity) throws SQLException {
 			System.out.println("Add airport");
-			// create an SELECT SQL query
-			String query = "INSERT INTO airport (airport_name, airport_city) VALUES (?, ?)";
-			
-			// checking validity of the name given and if it already exists
-			if(validAirportName(airportName) && !airportExists(airportName)){
+			System.out.println("Airport name:" + airportName);
+			System.out.println("Airport city: " + airportCity);
+			if(airportName.equals("") || airportCity.equals("")) {
+				message = "Please enter both airport name and city";
+			} else {
+				// create an SELECT SQL query
+				String query = "INSERT INTO airport (airport_name, airport_city) VALUES (?, ?)";
 				
-					PreparedStatement statement = connection.prepareStatement(query);
-					// fill in the placeholders/parameters
-					statement.setString(1, airportName.toUpperCase());
-					statement.setString(2, airportCity);
-					// execute the query
-					statement.executeUpdate();
-					//System.out.println("Airport " + name + " in the city " + city + " added to the database.");
-					message = "Airport " + airportName.toUpperCase() + " in the city " + airportCity + " added to the database.";
-				}
+				// checking validity of the name given and if it already exists
+				if(validAirportName(airportName) && !airportExists(airportName)){
+					
+						PreparedStatement statement = connection.prepareStatement(query);
+						// fill in the placeholders/parameters
+						statement.setString(1, airportName.toUpperCase());
+						statement.setString(2, airportCity);
+						// execute the query
+						statement.executeUpdate();
+						//System.out.println("Airport " + name + " in the city " + city + " added to the database.");
+						message = "Airport " + airportName.toUpperCase() + " in the city " + airportCity + " added to the database.";
+					}
 			}
+		}
 		
 
 		// method to check length of the name and if it contains only alphabets

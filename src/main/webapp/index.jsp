@@ -12,39 +12,29 @@
     <title>Index, Welcome page</title>
   </head>
 <body>
+<div align="center" class="p-3 mb-2 bg-light text-dark">
 <h2>Welcome to FlightManager Application</h2>
 
-<a href="/home">Click here to go to the Home Page of Flight Manager Application</a>
-<p></p>
-
-
-<p>
- * Flight Manager App
- * By: Jasmin Adilovic
- * E-mail: adilovic79yahoo.com
- * Date: OCT 2019
- * ***Flight manager application***
-
-1. An airport must have a name consisting of exactly three alphabetical
- characters. No two airports can have the same name.
-2. An airline has a name that must have less than 6 alphabetic
- characters. No two airlines can have the same name.
-3. Each flight consists of seats organized in rows. Each row is labeled
- with ("A", "B", "C", "D", "E", "F"). Each row has number of seats 
-in row.
-4. Every flight has an airport,airline origin destination and seats.
- 
- User can:
- 	-Create airport
- 	-Create airline
- 	-Create flight
- 	-Book a seat on a flight
- </p>
- 
- <button href="/hello" type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
- 
-<a href="/hello">Webapp Hosting Info Servlet</a>
-<a href="/hello" class="btn btn-primary btn-lg btn-block">Bootstrap button with lnik</a>
-
+<a href="/home" class="btn btn-warning btn-lg btn-block">Click here to go to the Home Page of Flight Manager Application</a>
+	<div align="center">
+ 		* By: Jasmin Adilovic *</br>
+ 		* E-mail: adilovic79yahoo.com *</br>
+ 		* Date: FEB 2020 *</br>
+	</div>
+	<div align="justify" class="p-3 mb-2 bg-success text-white">
+		1. An airport must have a name consisting of exactly three alphabeticalcharacters. No two airports can have the same name.</br>
+		2. An airline has a name that must have less than 6 alphabetic characters. No two airlines can have the same name.</br>
+		3. Each flight consists of seats organized in rows. Each row is labeled with ("A", "B", "C", "D", "E", "F"). Each row has number of seats in row.</br>
+		4. Every flight has an airport,airline origin destination and seats.</br>
+	</div>
+	<div align="left">
+		User can:</br>
+ 			-Create airport</br>
+ 			-Create airline</br>
+ 			-Create flight</br>
+ 			-Book a seat on a flight</br>
+	</div>
+		<a href="/hello" class="btn btn-primary btn-lg btn-block">Webapp Hosting Info Servlet</a>
+	</div>
 </body>
 </html>
