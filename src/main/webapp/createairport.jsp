@@ -10,27 +10,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/326e4a206d.js" crossorigin="anonymous"></script>
 <title>Create Airport</title>
 </head>
 <body>
-<div align="center" >
-<h3>Create Airport Page</h3>
-<h5>Please enter data to create an airport</h5>
+<div align="center" class="p-3 mb-2 bg-light text-dark">
+
+	<div class="p-3 mb-2 bg-warning text-dark">
+		<h4><i class="fas fa-globe-europe"></i> Create Airport</h4>
+	</div>
+	<div class="p-3 mb-2 bg-success text-white">
+		<h5><i class="fas fa-plane-arrival"></i> Please enter airport name and city below</h5>
+	</div>
+
 <form action="${pageContext.request.contextPath}/airport" method="post">
 	<input type="hidden" name="message" value="" />
 	<input type="hidden" name="option" value="${param.option}" />
-	<p>Airport name:</p><input type="text" name="airportName" /><br/>
-	<p>Airport city:</p><input type="text" name="airportCity" /><br/>
-	<p></p><input type="submit" value="SUBMIT" />
+
+			<div class="p-2 bg-primary text-white">
+				<strong>Airport name: </strong><input type="text" name="airportName" /><br/>
+			</div>
+			<div class="p-2 bg-secondary text-white">
+				<strong>Airport city: </strong><input type="text" name="airportCity" /><br/>
+			</div>
+		
+		<div>
+			<i class="fas fa-paper-plane"></i>
+		</div>
+		
+	<input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit" />
 </form>
 
 	<c:if test="${param.message != null}">
-		<div style="background-color:red" >
-			<p><%= request.getAttribute("message") %></p>
+		<div class="p-2 bg-danger text-white" >
+			<%= request.getAttribute("message") %>
 		</div>
 	</c:if>
-
-	<p><a href="/airport" >Home</a></p>
+<div>
+	<p></p>
+</div>
+	<p><a href="/airport" class="btn btn-warning btn-lg btn-block"> <i class="fas fa-home"></i> Home</a></p>
 </div>
 </body>
 </html>
