@@ -16,10 +16,10 @@
 <body>
 <div align="center" class="p-3 mb-2 bg-light text-dark">
 
-	<div class="p-3 mb-2 bg-warning text-dark">
+	<div class="p-1 mb-2 bg-warning text-dark">
 		<h4><i class="fas fa-globe-europe"></i> Create Airport</h4>
 	</div>
-	<div class="p-3 mb-2 bg-success text-white">
+	<div class="p-1 mb-2 bg-success text-white">
 		<h5><i class="fas fa-plane-arrival"></i> Please enter airport name and city below</h5>
 	</div>
 
@@ -28,10 +28,12 @@
 	<input type="hidden" name="option" value="${param.option}" />
 
 			<div class="p-2 bg-primary text-white">
-				<strong>Airport name: </strong><input type="text" name="airportName" /><br/>
+				<strong>Airport name: </strong><br>
+				<input type="text" name="airportName" />
 			</div>
 			<div class="p-2 bg-secondary text-white">
-				<strong>Airport city: </strong><input type="text" name="airportCity" /><br/>
+				<strong>Airport city: </strong><br>
+				<input type="text" name="airportCity" />
 			</div>
 		
 		<div>
