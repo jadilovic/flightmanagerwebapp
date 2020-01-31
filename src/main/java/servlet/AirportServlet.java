@@ -72,7 +72,7 @@ public class AirportServlet extends HttpServlet {
 		else if(option.equals("List Airports")) {
 			List<Airport> listOfAirports = new ArrayList<Airport>();
 			try {
-				listOfAirports = create.getAllAirports();
+				listOfAirports = AirportManager.getAllAirports();
 				request.setAttribute("airportsList", listOfAirports);
 				request.setAttribute("message", create.getMessage());
 				page = "/listOfAirportsView.jsp";

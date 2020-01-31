@@ -48,10 +48,12 @@
 			<%= request.getAttribute("message") %>
 		</div>
 	</c:if>
-<div>
+	<i class="fas fa-list"></i>
+	<form action="${pageContext.request.contextPath}/airport" method="post">
+		<input class="btn btn-info btn-lg btn-block" type="submit" name="option" value="List Airports" />
+	</form>
 	<p></p>
-</div>
-	<p><a href="/airport" class="btn btn-warning btn-lg btn-block"> <i class="fas fa-home"></i> Home</a></p>
+	<a href="/airport" class="btn btn-warning btn-lg btn-block"><i class="fas fa-home"></i> Home</a>
 </div>
 </body>
 </html>
