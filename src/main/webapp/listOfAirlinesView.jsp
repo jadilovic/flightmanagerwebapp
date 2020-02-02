@@ -4,22 +4,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/326e4a206d.js" crossorigin="anonymous"></script>
 <title>Airlines List</title>
 </head>
 <body>
-<div align="center" >
-<h3>List of Available Airlines</h3>
+<div align="center" class="p-3 mb-2 bg-light text-dark">
  
-    <p style="color: red;">${errorString}</p>
- 
-    <table border="1">
+	<table>
+		<tr>
+			<td>
+			<a href="/airline" class="btn btn-primary btn-lg btn-block"><i class="fas fa-home"></i> Home</a>
+			</td>
+			<td>
+			<form action="${pageContext.request.contextPath}/airline" method="get">
+				<input class="btn btn-primary btn-lg btn-block" type="submit" name="option" value="Create Airline" />
+			</form>
+			</td>
+		</tr>
+	</table>
+		
+	<div class="p-1 mb-2 bg-warning text-dark">
+		<h4><i class="fas fa-plane"></i> List of Available Airlines</h4>
+	</div>
+	
+
+    <table class="table table-striped table-success">
        <tr>
-          <th>Airline Name</th>
+       		<th>Number</th>
+          	<th>Airline Name</th>
        </tr>
        <c:forEach items="${airlinesList}" var="airline" >
+       <c:set var="num" scope="page" value="${num + 1}" />
           <tr>
-             <td>${airline.name}</td>
+          		<td>${num}</td>
+             	<td>${airline.name}</td>
           </tr>
        </c:forEach>
     </table>

@@ -34,13 +34,16 @@
 
     <table class="table table-striped table-success">
        <tr>
-          <th>Airport Name</th>
-          <th>Airport City</th>
+       		<th>Number</th>
+          	<th>Airport Name</th>
+          	<th>Airport City</th>
        </tr>
        <c:forEach items="${airportsList}" var="airport" >
+       	<c:set var="num" value="${num + 1}" scope="page"/>
           <tr>
-             <td>${airport.name}</td>
-             <td>${airport.city}</td>
+          	<td>${num}</td>
+            <td>${airport.name}</td>
+            <td>${airport.city}</td>
           </tr>
        </c:forEach>
     </table>

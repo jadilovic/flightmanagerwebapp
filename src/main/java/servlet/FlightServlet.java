@@ -37,6 +37,9 @@ public class FlightServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+		Connection conn = MyUtils.getStoredConnection(req);
+		FlightManager create = new FlightManager(conn);
+		List<Flight> listOfFlights = new ArrayList<Flight>();
     	System.out.println("DoGET Flight Servlet");
     	String option = req.getParameter("option");
     	String message = "";
@@ -45,6 +48,13 @@ public class FlightServlet extends HttpServlet {
         	if(option.equals("List Flights")) {
         		doPost(req, resp);
         	} else if(option.equals("Create Flight")) {
+				try {
+					listOfFlights = create.getAllFlights();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				req.setAttribute("flightsList", listOfFlights);
                 req.getRequestDispatcher("/createflight.jsp").forward(req, resp);
         	} else if(option.equals("Find a Flight")) {
         		req.setAttribute("message", message);
