@@ -27,6 +27,12 @@
 	<div class="p-1 mb-2 bg-success text-white">
 		<h5><i class="fas fa-plane-arrival"></i> Please complete fields to create an flight</h5>
 	</div>
+	
+	<c:if test="${param.message != null}">
+		<div class="p-2 bg-danger text-white" >
+			<%= request.getAttribute("message") %>
+		</div>
+	</c:if>
 
 <form action="${pageContext.request.contextPath}/flight" method="post">
 	<input type="hidden" name="message" value="" />
@@ -113,13 +119,7 @@
 	</table>
 	<input class="btn btn-success btn-lg btn-block" type="submit" value="SUBMIT" />
 	</form>
-	
-	<c:if test="${param.message != null}">
-		<div class="p-2 bg-danger text-white" >
-			<%= request.getAttribute("message") %>
-		</div>
-	</c:if>
-	
+
 	<i class="fas fa-list"></i>
 	<form action="${pageContext.request.contextPath}/flight" method="post">
 		<input class="btn btn-info btn-lg btn-block" type="submit" name="option" value="List Flights" />
