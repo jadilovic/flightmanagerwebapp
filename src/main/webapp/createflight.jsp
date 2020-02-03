@@ -117,7 +117,7 @@
 			</td>
 		</tr>
 	</table>
-	<input class="btn btn-success btn-lg btn-block" type="submit" value="SUBMIT" />
+	<input class="btn btn-secondary btn-lg btn-block" type="submit" value="Submit" />
 	</form>
 
 	<i class="fas fa-list"></i>

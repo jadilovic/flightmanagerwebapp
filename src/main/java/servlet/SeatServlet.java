@@ -76,15 +76,24 @@ public class SeatServlet extends HttpServlet {
 		Seat bookedSeat = new Seat();
 			
 		if(option.equals("Flight Seats")) {
-			try {
-				listOfSeats = seat.getFlightSeats(flightID);
-				request.setAttribute("flightSeats", listOfSeats);
-				request.setAttribute("listSize", listOfSeats.size());
-				request.setAttribute("message", seat.getMessage());
-				page = "/listOfSeatsView.jsp";
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			if(flightID.equals("")) {
+				message = "No flight ID entered. Please try again";
+				request.setAttribute("message", message);
+				page = "/flightseats.jsp";
+			} else {
+				try {
+					listOfSeats = seat.getFlightSeats(flightID);
+					request.setAttribute("flightSeats", listOfSeats);
+					request.setAttribute("listSize", listOfSeats.size());
+					request.setAttribute("message", seat.getMessage());
+					if(listOfSeats.size() == 0)
+						page = "/flightseats.jsp";
+					else
+						page = "/listOfSeatsView.jsp";
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			} else if(option.equals("List Seats")) {
 			try {

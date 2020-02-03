@@ -87,7 +87,6 @@ public class FlightServlet extends HttpServlet {
 		List<Flight> listOfFlights = new ArrayList<Flight>();
 			
 		if(option.equals("Create Flight")) {
-			System.out.println("Create Flight option Origin: '" + origin + "'");
 				try {
 					create.addFlight(flightId, flightName, origin, destination, airport, airline, seatsPerRow);
 					request.setAttribute("message", create.getMessage());
@@ -98,7 +97,6 @@ public class FlightServlet extends HttpServlet {
 				}
 			}
 		else if(option.equals("List Flights")) {
-			System.out.println("List Flights option Origin: '" + origin + "'");
 			try {
 				listOfFlights = create.getAllFlights();
 				request.setAttribute("flightsList", listOfFlights);
@@ -110,11 +108,10 @@ public class FlightServlet extends HttpServlet {
 				e.printStackTrace();
 			} 
 		} else if(option.equals("Find a Flight")) {
-			System.out.println("Origin: '" + origin + "'");
 			if(origin.equals("") || destination.equals("")) {
 				String message = "Origin or destination were not entered. Please try again";
         		request.setAttribute("message", message);
-        		request.getRequestDispatcher("/findaflight.jsp").forward(request, response);
+        		page = "/findaflight.jsp";
 			} else {
 				try {
 					listOfFlights = create.findFlight(origin, destination);

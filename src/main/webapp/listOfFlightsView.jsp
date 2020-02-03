@@ -72,13 +72,6 @@
           </tr>
        </c:forEach>
     </table>
-    
-    <c:if test="${param.message != null}">
-	<div style="background-color:red" >
-			<p><%= request.getAttribute("message") %></p>
-	</div>
-	</c:if>
-
 </div>
 </body>
 </html>
