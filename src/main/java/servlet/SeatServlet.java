@@ -85,11 +85,14 @@ public class SeatServlet extends HttpServlet {
 					listOfSeats = seat.getFlightSeats(flightID);
 					request.setAttribute("flightSeats", listOfSeats);
 					request.setAttribute("listSize", listOfSeats.size());
-					request.setAttribute("message", seat.getMessage());
-					if(listOfSeats.size() == 0)
+					//request.setAttribute("message", seat.getMessage());
+					if(listOfSeats.size() == 0) {
+						message = "Entered flight ID does not exist. Please try again";
+						request.setAttribute("message", message);
 						page = "/flightseats.jsp";
-					else
-						page = "/listOfSeatsView.jsp";
+						}
+						else
+							page = "/listOfSeatsView.jsp";
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
